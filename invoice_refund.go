@@ -12,8 +12,11 @@ type InvoiceRefund struct {
 	Type *string `json:"type,omitempty"`
 
 	// The amount to be refunded. The amount will be split between the line items.
-	// If no amount is specified, it will default to refunding the total refundable amount on the invoice.
+	// If `type` is "amount" and no amount is specified, it will default to refunding the total refundable amount on the invoice. Can only be present if `type` is "amount".
 	Amount *float64 `json:"amount,omitempty"`
+
+	// The percentage of the remaining balance to be refunded. The percentage will be split between the line items. If `type` is "percentage" and no percentage is specified, it will default to refunding 100% of the refundable amount on the invoice. Can only be present if `type` is "percentage".
+	Percentage *int `json:"percentage,omitempty"`
 
 	// The line items to be refunded. This is required when `type=line_items`.
 	LineItems []LineItemRefund `json:"line_items,omitempty"`
